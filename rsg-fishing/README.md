@@ -43,6 +43,7 @@ Prompts shown during the flow:
 (Actual keys depend on your client keybinds and prompt setup; texts are localized.)
 
 Config.Tuning = {
+
     SearchRadius     = 50.0,   -- how far nearby fish are lured toward the hook
     BiteDistance     = 7.5,    -- distance at which a fish can bite the hook
     LureCooldownMs   = 5000,   -- ms between lure checks
@@ -53,6 +54,7 @@ Config.Tuning = {
     ForceDown        = 0.006,  -- force decay per tick otherwise
     BreakThreshold   = 2.5,    -- if fishForce exceeds this, line slips/penalizes
     MinAgitatedForce = 0.5,    -- minimum force while agitated
+    
 }
 
 💎 Credits
