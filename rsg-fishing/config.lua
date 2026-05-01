@@ -1,7 +1,7 @@
 Config = {}
 
 -- Discord Logs
-Config.DiscordWebhook = 'https://discord.com/api/webhooks/1492922355092291795/WmDEzDKycURqoObIjb-rf8dhSfYGrPdAUQlCqM6q7yt3WYvVitpBgc5xft9THmR_GCEY'
+Config.DiscordWebhook = ''
 
 -- settings
 Config.Difficulty = 1200 -- use -1 for testing
