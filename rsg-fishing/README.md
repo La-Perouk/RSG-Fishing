@@ -40,6 +40,7 @@ Prompts shown during the flow:
 - Prepare Fishing Rod, Cast Fishing Rod, Hook, Reset Cast
 - Reel Lure, Reel In
 - Keep Fish, Throw Fish
+  
 (Actual keys depend on your client keybinds and prompt setup; texts are localized.)
 
 Config.Tuning = {
