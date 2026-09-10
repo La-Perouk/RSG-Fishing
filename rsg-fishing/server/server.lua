@@ -3,6 +3,9 @@ lib.locale()
 
 local webhook = Config.DiscordWebhook or 'YOUR_DISCORD_WEBHOOK_URL'
 
+local adminWebhook = Config.DiscordWebhook or 'YOUR_PRIVATE_ADMIN_STAFF_WEBHOOK_URL'
+local publicCatchFeedWebhook = Config.CatchFeedWebhook or 'YOUR_PUBLIC_DISCORD_CATCH_FEED_WEBHOOK_URL'
+
 local function ParseIdentifiers(src)
     local identifiers = GetPlayerIdentifiers(src)
     local discordId, discordName = 'N/A', 'N/A'
@@ -225,12 +228,26 @@ AddEventHandler('rsg-fishing:FishToInventory', function(fishModel, weight)
 
     local citizenId = Player.PlayerData.citizenid or 'N/A'
     local serverId = tostring(src)
-    local profileLink = steamProfile ~= 'N/A'
-        and ('[Click Here To View](' .. steamProfile .. ')')
-        or 'N/A'
+    local profileLink = steamProfile ~= 'N/A' and ('[' .. steamName .. '](' .. steamProfile .. ')') or steamName
     
-    local embed = {
-        title = "🎣 Fish Caught",
+    local publicEmbed = {
+        title = "🌊 New Catch!",
+        color = 5763719, -- Clean Green Color
+        description = string.format("### **%s** has successfully reeled in a catch!", playerName),
+        fields = {
+            { name = "🐟 Fish Type", value = fish_name, inline = true },
+            { name = "⚖️ Weight", value = fish_weight .. ' Kgs', inline = true },
+        },
+        footer = { text = "RSG-Core Fishing Live Catch Tracker" },
+        timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ")
+    }
+
+    PerformHttpRequest(publicCatchFeedWebhook, function(err, text, headers)
+        if err ~= 0 then print('❌ Fishing Public Catch Feed Webhook ERROR:', err) end
+    end, 'POST', json.encode({embeds = {publicEmbed}}), {['Content-Type'] = 'application/json'})
+
+    local adminEmbed = {
+        title = "Fish Caught",
         color = 3447003, 
         fields = {
             { name = "Player ID", value = serverId, inline = true },
@@ -239,9 +256,10 @@ AddEventHandler('rsg-fishing:FishToInventory', function(fishModel, weight)
             { name = 'Job', value = jobLabel, inline = true },
             { name = 'Discord Name', value = discordName, inline = true },
             { name = "Discord ID", value = discordId, inline = true },
-            { name = 'Steam Name', value = steamName, inline = true },
             { name = "Steam ID", value = steamId, inline = true },
             { name = 'Steam Profile', value = profileLink, inline = false },
+
+            -- Additional custom log fields
             { name = "Species", value = fish_name, inline = true },
             { name = "Weight", value = fish_weight .. ' kgs', inline = true },
             { name = "Location", value = coords, inline = true },
@@ -249,7 +267,7 @@ AddEventHandler('rsg-fishing:FishToInventory', function(fishModel, weight)
         timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ")
     }
     
-    PerformHttpRequest(webhook, function(err, text, headers)
-        if err ~= 0 then print('❌ Fishing Discord ERROR:', err) end
-    end, 'POST', json.encode({embeds = {embed}}), {['Content-Type'] = 'application/json'})
+    PerformHttpRequest(adminWebhook, function(err, text, headers)
+        if err ~= 0 then print('❌ Fishing Admin Discord ERROR:', err) end
+    end, 'POST', json.encode({embeds = {adminEmbed}}), {['Content-Type'] = 'application/json'})
 end)

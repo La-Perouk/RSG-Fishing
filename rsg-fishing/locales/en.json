@@ -15,7 +15,7 @@
 "cl_hold_ctrl_stop_reeling" : "Hold LEFT CONTROL to stop reeling / HOLD SPACE TO REEL IN FISH",
 "cl_keep_fish" : "Keep Fish",
 "cl_throw_fish" : "Throw Fish",
-	"cl_only_rod_fish": "You can only collect fish caught with a fishing rod.",
+"cl_only_rod_fish": "You can only collect fish caught with a fishing rod.",
 
 "sv_you_got_fish_name" : "You got a",
 "sv_discord_b" : "Fish | Caught",
