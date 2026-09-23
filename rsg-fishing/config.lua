@@ -1,9 +1,8 @@
 Config = {}
 
 -- Discord Logs
-Config.DiscordWebhook = 'https://discord.com/api/webhooks/1492922355092291795/WmDEzDKycURqoObIjb-rf8dhSfYGrPdAUQlCqM6q7yt3WYvVitpBgc5xft9THmR_GCEY'
-Config.CatchFeedWebhook ='https://discord.com/api/webhooks/1536058045254209636/0__PJ0kQ06ZGTkusu3vpCi-C4DrMzaeGOAg-mU-hbLEKdDMT9AxZE7hstWQr1VM2I7mX'
-
+Config.DiscordWebhook = ''
+Config.CatchFeedWebhook =''
 -- settings
 Config.Difficulty = 1200       -- use -1 for testing
 Config.ReelSpeed = 0.0145
